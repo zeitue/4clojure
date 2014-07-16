@@ -1,0 +1,16 @@
+(fn pack-seq [u]
+    (loop [i (- (count u) 2)
+           x (conj '() (last u))
+           y (drop-last u)
+           r '()]
+      (if (= i -1)
+        (conj r x)
+        (if (= (first x) (last y))
+            (recur (- i 1)
+                   (conj x (last y))
+                   (drop-last y)
+                   r)
+              (recur (- i 1)
+                     (conj '() (last y))
+                     (drop-last y)
+                     (conj r x))))))
